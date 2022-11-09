@@ -1,0 +1,58 @@
+from time import sleep
+Perguntas= {
+    'Pergunta 1': {
+        'Pergunta' : 'Quantos é 2+2?',
+        'Respostas' : {
+          'a': '1',
+          'b': '2',
+          'c': '4',
+          'd': '5'},
+        'Resposta certa':'c',
+    },
+    'Pergunta 2': {
+        'Pergunta' : 'Quantos é 5*2?',
+        'Respostas' : {
+          'a': '7',
+          'b': '15',
+          'c': '10',
+          'd': '25'},
+        'Resposta certa':'c',
+    },
+    'Pergunta 3': {
+        'Pergunta' : 'Quantos é 10*2?',
+        'Respostas' : {
+          'a': '20',
+          'b': '15',
+          'c': '10',
+          'd': '25'},
+        'Resposta certa':'a',
+    }
+    
+}
+
+for a,b in Perguntas.items():
+    print()
+    print(a)
+    print(b['Pergunta'])
+    print()
+    certo=b['Resposta certa']
+    for c,d in b['Respostas'].items():
+        print(f'{c} = {d}')
+    print()
+    resp=input('Digite sua resposta:')
+    if resp==certo:
+        print()
+        print('-----------Acertou-------------')
+        
+    else:
+        print()
+        print('------------Errou------------')
+        print('A resposta certa é:',certo)
+    sleep(2)
+    
+    
+        
+        
+        
+        
+        
