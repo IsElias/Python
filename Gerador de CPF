@@ -1,0 +1,63 @@
+def ver():
+    from random import randint
+    cpf=str(randint(000000000,999999999))
+    if len(cpf)<9:
+        ver()
+    oi1=[(cpf[:3])]
+    oi1.append(cpf[3:6])
+    oi1.append(cpf[6:9])
+    junto='.'.join(oi1)
+    
+    #--------------
+
+    soma=0
+    aux=10
+    cont=0
+    for n in range(18):
+        if n>8:
+            n-=9
+        if aux <2:
+            digito1=soma
+            soma=0
+            aux=11
+        soma+=int(cpf[n])*aux
+        aux-=1
+        
+    digito1=11-(digito1%11)
+    if digito1>9:
+        digito1=0
+        
+    digito2=11-(soma%11)
+    if digito2>9:
+        digito2=0
+        
+    ok=str(digito1)+str(digito2)
+    new=[junto,ok]
+    fim='-'.join(new)
+    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+    print('     CPF VÁLIDO:',fim)
+    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+    print('[ 1 ] GERAR OUTRO')
+    print('[ 2 ] TERMINAR')
+    esc=int(input('Escolha uma opção:'))
+    if esc==1:
+        ver()
+    elif esc==2:
+        print('Até mais!')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
