@@ -1,0 +1,59 @@
+def ver():
+
+   cont=0
+    
+   num1=int(input('Digite um numero:'))
+   num2=int(input('Digite outro numero:'))
+   print()
+    
+   while cont<1: 
+    print('[ 1 ] somar')
+
+    print('[ 2 ] multiplicar')
+
+    print('[ 3 ] maior')
+
+    print('[ 4 ] novos números')
+
+    print('[ 5 ] sair do programa')
+    print()
+    resp=int(input('Selecione uma opção:'))
+    print()
+
+    
+    if resp==1:
+        print('A soma do numero {} com o numero {} e igual a {}:'.format(num1,num2,num1+num2))
+
+    elif resp==2:
+        print('A multiplicação do numero {} com o numero {} e igual a {}:'.format(num1,num2,num1*num2))
+
+    elif resp==3:
+        if num1>num2:
+            print('O numero {} é maior'.format(num1))
+        elif num2>num1:
+            print('O numero {} é maior'.format(num2))
+        else:
+            print('Os dois numeros tem o mesmo valor')
+    elif resp==4:
+        print('-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-')
+        
+        ver()
+    else:
+        print('Até a proxima')
+        break
+
+    print()
+    print('[ 1 ] CONTINUAR')
+    print('[ 2 ] SAIR')
+    print()
+    perg=int(input('Selecione uma opção: '))
+    print()
+             
+    if perg==1:
+        cont-=1
+    else:
+        print('Até mais')
+        
+    cont+=1
+    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-')
+ver()
