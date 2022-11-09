@@ -1,0 +1,165 @@
+
+from time import sleep
+from random import choice
+import os
+os.system('cls')
+jogar=0
+vida=10
+while jogar<3:
+    vida=10
+    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+    print(f'          Jogo da palavra secreta')
+    print(f'             Você terá {vida} vidas')
+    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+
+    comida=['hamburguer','hotdog','lasanha','panqueca']
+    motos=['mt03','hornet','xj6','titan']
+    selecione=-1
+    while selecione<0:
+        print()
+        print('[1] COMIDAS')
+        print('[2] MOTOS')
+        print()
+        selecione=int(input('Selecione uma opção:'))
+        print()
+        
+        if selecione == 1:
+            ajuda='COMIDA'
+            secreto=choice(comida)
+        elif selecione == 2:
+            ajuda='MOTOS'
+            secreto=choice(motos)
+        else:
+            print('Opção invalida')
+                
+        
+    palavra='-'*len(secreto)
+    print(f'                {ajuda}')
+    print(f'            Contém {len(secreto)} letras')
+    print()
+    print(f'               {palavra}')
+    pal=([x for x in palavra])
+    new= ''.join([x for x in secreto])
+    paz=''.join(pal)
+
+
+    while paz != secreto:
+        print()
+        letra=input(('Digite uma letra:')).lower()
+        if letra==secreto:
+            break
+        if len(letra)==1:
+            if letra in secreto:
+                if letra in pal:
+                    os.system('cls')
+                    print()
+                    vida-=1
+                    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+                    print('Letra repetida')
+                    print('Perdeu 1 vida, agora você tem',vida)
+                    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+                    print()
+                    print(f'                {ajuda}')
+                    print(f'            Contém {len(secreto)} letras')
+                    print(f'                Vidas:{vida}')
+                    print()
+                    print(f'               {paz}')
+                else:
+                    os.system('cls')
+                    qtd=secreto.count(letra)
+                    print()
+                    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+                    print(f'+{10*qtd} pontos, letra "{letra}" descoberta')
+                    print(f'Esta letra aparece {qtd} vez(es)')
+                    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+                        
+                    print()
+                
+                    if qtd==1:
+                        posicao=secreto.find(letra)
+                        pal[posicao]=letra
+    
+                    elif qtd>1:
+                        posicao1=secreto.find(letra)
+                        aux=[x for x in secreto]
+                            
+                        for x in secreto:
+                            aux1=''.join(aux)
+
+                            if x==letra: 
+                                posicao1=aux1.find(letra)
+                                pal[posicao1]=letra
+                                aux[posicao1]='#'
+                                
+                    new=new.replace(letra,'-')
+                    paz=''.join(pal)
+                    print(f'                {ajuda}')
+                    print(f'            Contém {len(secreto)} letras')
+                    print(f'                Vidas:{vida}')
+                    print()
+                    print(f'               {paz}')
+                        
+            else:
+                os.system('cls')
+                print()
+                print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+                print('Não tem essa letra :P')
+                vida-=1
+                if vida<1:
+                    break
+                print('Perdeu 1 vida, agora você tem',vida) 
+                print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+                print()
+                print(f'                {ajuda}')
+                print(f'            Contém {len(secreto)} letras')
+                print(f'                Vidas:{vida}')
+                print()
+                print(f'               {paz}')
+        else:
+            os.system('cls')
+            print()
+            print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+            print('Há mais de uma letra')
+            print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+            print()
+            print(f'                {ajuda}')
+            print(f'            Contém {len(secreto)} letras')
+            print(f'                Vidas:{vida}')
+            print()
+            print(f'               {paz}')
+        
+    if vida>0:    
+        print('Parabens, você ganhou. A palavra era:')
+        print()
+        print(f'         --> {secreto.upper()} <--')
+        print()
+    else:
+        print('Você perdeu! :(')
+    print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+    print('[1] JOGAR NOVAMENTE')
+    print('[2] SAIR')
+    y=int(input('Selecione uma opção:'))
+    if y==2:
+        jogar=10
+    
+    sleep (1)
+    print()
+    print(f'           Loanding...')
+    sleep (2)
+    
+    os.system('cls')
+    
+
+        
+
+
+    
+    
+    
+    
+   
+
+
+
+        
+   
