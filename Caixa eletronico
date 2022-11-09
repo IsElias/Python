@@ -1,0 +1,32 @@
+
+    
+valor=int(input('Qual o valor a ser sacado?: '))
+cem=0
+cinq=0
+vint=0
+dez=0
+cinc=0
+one=0
+    
+while valor>=100:
+    valor-=100
+    cem+=1
+while valor>=50:
+    valor-=50
+    cinq+=1
+while valor>=20:
+    valor-=20
+    vint+=1
+while valor>=10:
+    valor-=10
+    dez+=1
+while valor>=1:
+    valor-=1
+    one+=1
+print()
+print('NOTAS DE 100 =',cem)
+print('NOTAS DE 50 =',cinq)
+print('NOTAS DE 20 =',vint)
+print('NOTAS DE 10 =',dez)
+print('NOTAS DE 1 =',one)
+        
