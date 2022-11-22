@@ -1,0 +1,85 @@
+def comeco():
+    cnpj=''
+    while True:
+        cnpj=input('Digite o CNPJ:')
+        print()
+        if len(cnpj)==18:
+            copia=cnpj
+            if copia[11:15]=='0001':
+                modelo='xx.xxx.xxx/xxxx-xx'
+                aux='1234567890'
+                for  i in range(len(aux)):
+                    copia=copia.replace(aux[i],'x')
+                if copia==modelo:
+                    break
+                else:
+                    print('Numeração inválida')
+                    continue
+            else:
+                print('Necessário ser ter 0001 depois da barra')                
+        if len(cnpj)==14:
+            if cnpj[8:12]!='0001':
+                print('Necessário ser ter 0001 depois da barra')
+            else:
+                break
+
+    var=cnpj
+    aux = './-'
+    for i in range(0,len(aux)):   
+        var =var.replace(aux[i],'')
+    copia=var
+    lista=[x for x in var]
+    del lista[12::]
+    var=''.join(lista)
+
+    def digitar(var,cont):
+        a=0
+        base=0
+        for n in range(len(var)):
+            base+=int(var[a])*cont
+            if cont==2:
+                cont=10
+            a+=1
+            cont-=1
+        return base
+    try:
+        base=digitar(var,5)
+
+
+        def pegar_dig(base):
+            digito1= 11-(base%11)
+            if digito1 >9:
+                digito1=0
+            return digito1
+        digito1=pegar_dig(base)
+        var1=var+str(digito1)
+
+        base=digitar(var,6)
+        digito2=pegar_dig(base)
+        var1+=str(digito2)
+
+        def transformar(x):
+            x=[y for y in var1]
+            x.insert(2,'.')
+            x.insert(6,'.')
+            x.insert(10,'/')
+            x.insert(15,'-')
+            x=''.join(x)
+            return x
+        final=transformar(var1)
+
+        if copia==var1:
+            print('CNPJ Valido!')
+            print(final)
+        else:
+            print('CNPJ INVALIDO!')
+            print('O correto seria:',final)
+    except:
+        print('ERRO NA DIGITAÇÃO')
+        comeco()
+comeco()
+opcao='S'
+while opcao=='S':
+    opcao=input('Deseja realizar novamente?(S/N):')
+    if opcao=='S':
+        comeco()
