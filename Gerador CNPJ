@@ -1,0 +1,42 @@
+from random import randint
+cnpj=''
+while len(cnpj)!=8:
+    cnpj=str(randint(00000000,99999999))
+cnpj+='0001'
+def digitar(var,cont):
+    a=0
+    base=0
+    for n in range(len(var)):
+        base+=int(var[a])*cont
+        if cont==2:
+            cont=10
+        a+=1
+        cont-=1
+    return base
+base=digitar(cnpj,5)
+def pegar_dig(base):
+    digito1= 11-(base%11)
+    if digito1 >9:
+        digito1=0
+    return digito1
+digito1=pegar_dig(base)
+var=cnpj+str(digito1)
+base=digitar(cnpj,6)
+digito2=pegar_dig(base)
+var+=str(digito2)
+
+def transformar(x):
+    x=[y for y in var]
+    x.insert(2,'.')
+    x.insert(6,'.')
+    x.insert(10,'/')
+    x.insert(15,'-')
+    x=''.join(x)
+    return x
+
+cnpj=transformar(var)
+if len(cnpj)==18:
+    print('-=-'*11)
+    print('CNPJ Gerado:',cnpj)
+    print('-=-'*11)
+    print()
