@@ -1,0 +1,201 @@
+import os
+from time import sleep
+import json
+
+# local_arquivo='arquivos_programa.json'
+# with open(local_arquivo,'r')as arquivo:
+#     dados=json.load(arquivo)
+
+# lista_nome=dados[0]
+# lista_senha=dados[1]
+# tarefas=dados[2]
+lista_nome=[]
+lista_senha=[]
+tarefas={}
+while True:
+    def comeco():
+        os.system('cls')
+        print('[A] Listar todos usuarios')
+        print('[B] Editar usuario')
+        print('[C] Cadastrar novo usuario')
+        print('[D] Salvar e sair')
+        print()
+        resp=input('Selecione uma opção: ').lower()
+        return resp
+    resp=comeco()
+
+    if resp=='d':
+        break
+    if resp=='a':
+        if len(lista_nome)==0:
+            os.system('cls')
+            print('-=-=-=-=-=Lista de usuarios=-=-=-=-=-')
+            print()
+            print('   Nenhum usuario cadastrado')
+            sleep(3)
+            continue
+        else:
+            os.system('cls')
+            print('-=-=-=-=-=Editar Usuario=-=-=-=-=-')
+            print()
+            print(*lista_nome,sep='\n')
+            print()
+            print('Digite qualquer coisa para retornar a tela inicial.')
+            sair=input()
+            continue
+            
+
+    elif resp=='b':
+        while True:
+            os.system('cls')
+            print('-=-=-=-=-=Editar usuario=-=-=-=-=-')
+            print('Digite "Sair" para retornar ao menu principal')
+            print()
+            nome=input('Digite o nome do usuario: ').title()
+        
+            if nome in lista_nome:
+                a=0
+                for p in range(len(lista_nome)):
+                    if nome in lista_nome[a]:
+                        pos=a
+                    a+=1
+                pedir_senha=input('Digite a senha por favor: ')
+                if pedir_senha == lista_senha[pos]:
+                    print()
+                    os.system('cls')
+                    print('Autorização liberada!')
+                    sleep(2)
+                    while True:
+                        os.system('cls')
+                        print('-=-=-=-=-=Editar usuario=-=-=-=-=-')
+                        print('Usuario:',nome)
+                        print()
+                        print('[A] Listar atividades')
+                        print('[B] Adicionar atividades')
+                        print('[C] Remover atividades')
+                        print('[D] Remover usuario')
+                        print('[E] Alterar senha')
+                        print('[F] Retornar')
+                        print()
+                        edit=input('Selecione uma opção: ').lower()
+                        if edit=='f':
+                            break
+                        aux=tarefas[nome]
+                        if edit=='b':
+                            print(*aux,sep='\n')
+                            print()
+                            while True:
+                                print('Digite "Cancelar" para retornar')
+                                atv=input('Digite a atividade: ').title()
+                                if atv=='Cancelar':
+                                    break
+                                tarefas[nome].append(atv)
+                                os.system('cls')
+                                print('Atividade salvas:')
+                                print(*aux,sep='\n')
+                                print()
+                            
+                        elif edit=='c':
+                            while True:
+                                if len(tarefas[nome])==0:
+                                    print()
+                                    print('-=-=-=-=Não há atividades cadastradas!-=-=-=-=')
+                                    sleep(3)
+                                else:
+                                    b=1
+                                    print()
+                                    for p in aux:
+                                        print(b,p)
+                                        b+=1
+                                    print()
+                                    print('Digite "0" para retornar')
+                                    remov=int(input('Escolha o numero da atividade que deseja remover:' ))
+                                    if remov==0:
+                                        break
+                                    remov-=1
+                                    ctz=input(f'Deseja realmente remover "{aux[remov]}"?(S/N): ').upper()
+                                    if ctz=='S':
+                                        del aux[remov]
+                                        print('Removido!')
+                                        sleep(2)
+                                    os.system('cls')
+                        elif edit=='d':
+                            remov=input(f'Deseja apagar completamente o usuario {lista_nome[pos]}?(S/N): ').upper()
+                            if remov=='S':
+                                del lista_nome[pos]
+                                del lista_senha[pos]
+                                del tarefas[nome]
+                                print('Usuario removido!')
+                                sleep(2)
+                                break
+                        elif edit=='a':
+                            if len(tarefas[nome])==0:
+                                print()
+                                print('-=-=-=-=Não há atividades cadastradas!-=-=-=-=')
+                                sleep(3)
+                            else:
+                                print(*aux,sep='\n')
+                        elif edit=='e':
+                            senha_atual=input('Digite sua senha atual: ')
+                            if senha_atual==pedir_senha:
+                                nova_senha=input('Digite sua nova senha: ')
+                                lista_senha[pos]=nova_senha
+                                print('Senha alterada com sucesso!')
+                                sleep(2)
+                        
+                else:
+                    print('Senha incorreta, tente novamente')
+                    sleep(3)
+                    continue
+            elif nome=='Sair':
+                break
+            else:
+                print('Nome de usuario incorreto, tente novamente')
+                sleep(2)
+                continue
+
+    elif resp=='c':
+        while True:
+            os.system('cls')
+            print('-=-=-=-=-=Cadastrar usuario=-=-=-=-=-')
+            print('Digite "Sair" para retornar ao menu principal')
+            print()
+            nome=input('Cadastre o nome do novo usuario: ').title()
+            if nome in lista_nome:
+                print('Este nome já contem na lista, tente outro')
+                continue
+            elif nome=='Sair':
+                break
+            senha=input('Digite sua senha de acesso: ')
+            lista_nome.append(nome)
+            lista_senha.append(senha)
+            tarefas[nome]=[]
+            aux=tarefas[nome]
+            print('Usuario cadastrado com sucesso!')
+            print()
+            adc_atv=input('Deseja cadastrar alguma atividade agora? (S/N):').upper()
+            if adc_atv=='S':
+                while True:
+                    print('Atividades salvas:')
+                    print(*aux,sep='\n')
+                    print()
+                    atv=input('Digite a atividade: ').title()
+                    tarefas[nome].append(atv)
+                    print()
+                    print('Atividade salvas:')
+                    print(*aux,sep='\n')
+                    print()
+                    mais=input('Deseja cadastrar mais alguma atividade? (S/N):').upper()
+                    if mais=='S':
+                        os.system('cls')
+                    else:
+                        break
+    else:
+        print('Comando invalido')
+        sleep(2)
+# bd=[lista_nome, lista_senha, tarefas]
+
+# local_arquivo='arquivos_programa.json'
+# with open(local_arquivo,'w',encoding='utf8')as arquivo:
+#     json.dump(bd, arquivo, ensure_ascii=False, indent=2)
+    
